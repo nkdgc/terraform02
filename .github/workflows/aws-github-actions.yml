@@ -31,14 +31,14 @@ jobs:
         run: |
           aws s3 ls
           ls -lR
-      # Terraform apply
+      # 01_ec2/ apply
       - name:  terraform init
         run: |
-          terraform init
+          terraform -chdir=01_ec2 init
       - name:  terraform validate
         run: |
-          terraform validate
+          terraform -chdir=01_ec2 validate
       - name:  terraform apply
         run: |
-          terraform apply -auto-approve
+          terraform -chdir=01_ec2 apply -auto-approve
 
