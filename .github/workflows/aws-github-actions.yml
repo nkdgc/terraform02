@@ -26,4 +26,19 @@ jobs:
       - name:  Copy index.html to s3
         run: |
           aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
+      # Debug
+      - name:  debug
+        run: |
+          aws s3 ls
+          ls -lR
+      # Terraform apply
+      - name:  terraform init
+        run: |
+          terraform init
+      - name:  terraform validate
+        run: |
+          terraform validate
+      - name:  terraform apply
+        run: |
+          terraform apply -auto-approve
 
