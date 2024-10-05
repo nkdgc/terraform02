@@ -47,7 +47,7 @@ resource "aws_instance" "ubuntu-web-server" {
   ami                    = "ami-0b20f552f63953f0e" # Ubuntu Server 24.04
   instance_type          = "t2.small"
   subnet_id              = aws_subnet.terraform02-subnet-private01
-  vpc_security_group_ids = [aws_security_group.sample_sg.id]
+  vpc_security_group_ids = [aws_security_group.ubuntu-web-server-sg.id]
   user_data              = <<EOF
 #! /bin/bash
 sudo dnf install -y httpd
