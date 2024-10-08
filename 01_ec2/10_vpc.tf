@@ -3,7 +3,7 @@ resource "aws_vpc" "terraform02-vpc" {
   cidr_block           = "10.200.0.0/16"
   enable_dns_hostnames = true
   tags = {
-    Name = "terraform02-vpc"
+    Name = "${var.env}-vpc"
   }
 }
 
@@ -11,7 +11,7 @@ resource "aws_vpc" "terraform02-vpc" {
 resource "aws_internet_gateway" "terraform02-igw01" {
   vpc_id = aws_vpc.terraform02-vpc.id
   tags = {
-    Name = "terraform02-igw01"
+    Name = "${var.env}-igw01"
   }
 }
 
@@ -26,7 +26,7 @@ resource "aws_nat_gateway" "terraform02-natgw01" {
   subnet_id     = aws_subnet.terraform02-subnet-public01.id
 
   tags = {
-    Name = "terraform02-natgw01"
+    Name = "${var.env}-natgw01"
   }
 
   # To ensure proper ordering, it is recommended to add an explicit dependency

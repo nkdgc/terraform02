@@ -1,6 +1,6 @@
 # セキュリティグループの作成
 resource "aws_security_group" "ubuntu-web-server-alb-sg" {
-  name   = "ubuntu-web-server-alb-sg"
+  name   = "${var.env}-ubuntu-web-server-alb-sg"
   vpc_id = aws_vpc.terraform02-vpc.id
   ingress {
     from_port   = 80

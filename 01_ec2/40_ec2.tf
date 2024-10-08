@@ -26,7 +26,7 @@
 
 # セキュリティグループの作成
 resource "aws_security_group" "ubuntu-web-server-sg" {
-  name   = "ubuntu-web-server-sg"
+  name   = "${var.env}-ubuntu-web-server-sg"
   vpc_id = aws_vpc.terraform02-vpc.id
   ingress {
     from_port   = 80
@@ -55,7 +55,7 @@ sudo systemctl start httpd
 sudo systemctl enable httpd
 EOF
   tags = {
-    Name = "ubuntu-web-server"
+    Name = "${var.env}-ubuntu-web-server"
   }
 }
 
