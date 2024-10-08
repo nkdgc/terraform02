@@ -3,13 +3,10 @@
 name: AWS example workflow
 on:
   push
-    branches:
-      - main
-      - staging
-      - development
 env:
-#   BUCKET_NAME : "terraform02-bucket01"
+  BUCKET_NAME : "terraform02-bucket01"
   AWS_REGION : "ap-northeast-1"
+# permission can be added at job level or workflow level
 permissions:
   id-token: write   # This is required for requesting the JWT
   contents: read    # This is required for actions/checkout
@@ -19,15 +16,6 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
-      - name: Set environment variables for each branch
-        run: |
-          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-            echo "BUCKET_NAME=terraform02-bucket01-main" >> $GITHUB_ENV
-          elif [ "${{ github.ref }}" == "refs/heads/staging" ]; then
-            echo "BUCKET_NAME=terraform02-bucket01-staging" >> $GITHUB_ENV
-          elif [ "${{ github.ref }}" == "refs/heads/development" ]; then
-            echo "BUCKET_NAME=terraform02-bucket01-development" >> $GITHUB_ENV
-          fi
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
