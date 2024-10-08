@@ -49,11 +49,11 @@ jobs:
       # 01_ec2/ apply
       - name:  terraform init
         run: |
-          terraform -chdir=01_ec2 -var 'env=${{ environment }}' init
+          terraform -chdir=01_ec2 -var 'env=${{ env.environment }}' init
       - name:  terraform validate
         run: |
-          terraform -chdir=01_ec2 -var 'env=${{ environment }}' validate
+          terraform -chdir=01_ec2 -var 'env=${{ env.environment }}' validate
       - name:  terraform apply
         run: |
-          terraform -chdir=01_ec2 -var 'env=${{ environment }}' apply -auto-approve
+          terraform -chdir=01_ec2 -var 'env=${{ env.environment }}' apply -auto-approve
 
