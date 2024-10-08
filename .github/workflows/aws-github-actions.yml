@@ -23,13 +23,13 @@ jobs:
         run: |
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "BUCKET_NAME=terraform02-bucket01-main" >> $GITHUB_ENV
-            echo "env=main" >> $GITHUB_ENV
+            echo "environment=main" >> $GITHUB_ENV
           elif [ "${{ github.ref }}" == "refs/heads/staging" ]; then
             echo "BUCKET_NAME=terraform02-bucket01-staging" >> $GITHUB_ENV
-            echo "env=stg" >> $GITHUB_ENV
+            echo "environment=stg" >> $GITHUB_ENV
           elif [ "${{ github.ref }}" == "refs/heads/development" ]; then
             echo "BUCKET_NAME=terraform02-bucket01-development" >> $GITHUB_ENV
-            echo "env=dev" >> $GITHUB_ENV
+            echo "environment=dev" >> $GITHUB_ENV
           fi
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -49,11 +49,11 @@ jobs:
       # 01_ec2/ apply
       - name:  terraform init
         run: |
-          terraform -chdir=01_ec2 -var 'env=$env' init
+          terraform -chdir=01_ec2 -var 'env=${{ environment }}' init
       - name:  terraform validate
         run: |
-          terraform -chdir=01_ec2 -var 'env=$env' validate
+          terraform -chdir=01_ec2 -var 'env=${{ environment }}' validate
       - name:  terraform apply
         run: |
-          terraform -chdir=01_ec2 -var 'env=$env' apply -auto-approve
+          terraform -chdir=01_ec2 -var 'env=${{ environment }}' apply -auto-approve
 
